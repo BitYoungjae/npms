@@ -1,7 +1,3 @@
-#!/bin/bash
-
-# Content to be installed
-NPMS_CONTENT='
 # npms-script-start::1.0.0
 run_npm_script() {
   # Finds the path to the nearest package.json in the current directory
@@ -37,35 +33,4 @@ run_npm_script() {
   fi
 }
 alias npms="run_npm_script"
-# npms-script-end'
-
-# Check current shell and select appropriate profile file
-if [[ "$SHELL" == */bash ]]; then
-  PROFILE_FILE="$HOME/.bashrc"
-elif [[ "$SHELL" == */zsh ]]; then
-  PROFILE_FILE="$HOME/.zshrc"
-else
-  echo "Unsupported shell. Please manually install using the script linked below."
-  echo "https://github.com/BitYoungjae/npms/blob/main/npms.sh"
-  exit 1
-fi
-
-# Check if fzf and jq are installed
-if ! command -v fzf &> /dev/null || ! command -v jq &> /dev/null; then
-  echo "Cannot find jq and fzf. Please install these required packages first."
-  exit 1
-else
-  # Checking if the npms script is already added
-  if ! grep -q "# npms-script-start" "$PROFILE_FILE"; then
-    echo "Adding npms alias to $PROFILE_FILE.."
-    # If the file does not end with a newline, add one at the beginning.
-    if [[ ! "$(tail -c 1 "$PROFILE_FILE" | tr -d '[:space:]')" == "" ]]; then
-        echo "" >> "$PROFILE_FILE"
-    fi
-    echo "$NPMS_CONTENT" >> "$PROFILE_FILE"
-    echo "Added successfully."
-    echo "Please run 'source $PROFILE_FILE' and then type 'npms' in the terminal."
-  else
-    echo "npms alias is already added to $PROFILE_FILE."
-  fi
-fi
+# npms-script-end
