@@ -21,7 +21,7 @@ brew install jq
 
 ## Install Script
 
-To install or update nvm, you should run the install script.
+To install, you should run the install script.
 
 ```sh
 # Using curl
